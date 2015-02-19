@@ -20,6 +20,7 @@ import command.CreateSongCommand;
 import command.GetSongCommand;
 import command.ListSongsCommand;
 import command.UpdateSongCommand;
+import command.DeleteSongCommand;
 import util.Constants;
 
 @Path("song")
@@ -107,5 +108,20 @@ public class Services {
 		return Response.status(200).build();
 	}
 	// Delete a song
+	
+	@Path("delete/{id}")
+	public Response deleteSong(String payload, @PathParam("id") int id){
+		DeleteSongCommand del = new DeleteSongCommand();
+		try{
+			del.execute(id);
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+			Response.status(400).entity("failed").build();
+		}
+		return Response.status(201).entity("Objectdeleted").build();
+		
+	}
+	
 	// Search songs
 }
