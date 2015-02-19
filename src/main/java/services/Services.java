@@ -114,6 +114,8 @@ public class Services {
 		DeleteSongCommand del = new DeleteSongCommand();
 		try{
 			del.execute(id);
+				
+			
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();

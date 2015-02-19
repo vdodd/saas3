@@ -16,9 +16,9 @@ public class DeleteSongCommand {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void execute(int id) {
+	public boolean execute(int id) {
 		Song s = new Song();
-		Boolean rt ;
+		Boolean rt = false;
 		try {
 			Connection connection = ConnectionProvider.getConnection();
 			// Statement stmt = connection.createStatement();
@@ -31,11 +31,13 @@ public class DeleteSongCommand {
 			
 			
 			
+			
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return rt;
 		
 	}
 	public static void main(String[] arg){
