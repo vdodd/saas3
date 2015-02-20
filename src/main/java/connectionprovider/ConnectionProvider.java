@@ -35,9 +35,9 @@ public class ConnectionProvider {
 			Connection connection = getConnection();
 			Statement stmt = connection.createStatement();
 			//stmt.executeUpdate("INSERT INTO GOODS(THING) VALUES('My cool Item');");
-			ResultSet rs = stmt.executeQuery("SELECT * FROM songs");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM TOKENs");
 			while (rs.next()) {
-				System.out.println("Thing: " + rs.getString("id"));
+				System.out.println("Thing: " + rs.getString("oauth"));
 			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
