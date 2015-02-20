@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,7 +25,7 @@ import command.UpdateSongCommand;
 import command.DeleteSongCommand;
 import util.Constants;
 
-@Path("song")
+@Path("/song")
 public class Services {
 	ObjectMapper mapper = new ObjectMapper();
 
@@ -49,7 +51,7 @@ public class Services {
 
 	// get song by Id
 	@GET
-	@Path("{id}")
+	@Path("/getid/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getSong(@PathParam("id") int id) {
 		GetSongCommand command = new GetSongCommand();
@@ -86,7 +88,7 @@ public class Services {
 	}
 	// Update a song
 	@POST
-	@Path("{id}")
+	@Path("/update/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response updateSongs(String payload, @PathParam("id") int id) {
@@ -107,23 +109,15 @@ public class Services {
 		}
 		return Response.status(200).build();
 	}
-	// Delete a song
-	
-	@Path("delete/{id}")
-	public Response deleteSong(String payload, @PathParam("id") int id){
-		DeleteSongCommand del = new DeleteSongCommand();
-		try{
-			del.execute(id);
-				
+	//delete function
+	//@DELETE
+	@Path("del/{id}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response delSong( @PathParam("id") int id){
+		DeleteSongCommand a = new DeleteSongCommand();
+		a.execute(id);
+		return Response.status(200).entity("Song deleted").build();
 			
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			Response.status(400).entity("failed").build();
-		}
-		return Response.status(201).entity("Objectdeleted").build();
-		
 	}
-	
 	// Search songs
 }

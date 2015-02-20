@@ -1,6 +1,14 @@
 package model;
 
 public class Song {
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Song [title=" + title + ", artist=" + artist + ", id=" + id
+				+ "]";
+	}
 	public String getTitle() {
 		return title;
 	}

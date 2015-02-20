@@ -19,7 +19,6 @@ public class GetSongCommand {
 			PreparedStatement stmt = connection
 					.prepareStatement("SELECT * FROM Songs WHERE id = ?");
 			stmt.setInt(1, id);
-			
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				s.setArtist(rs.getString("artist"));
@@ -33,28 +32,12 @@ public class GetSongCommand {
 		}
 		return s;
 	}
-	
-	public Song execute1(String a) {
-		Song s = new Song();
-		try {
-			Connection connection = ConnectionProvider.getConnection();
-			// Statement stmt = connection.createStatement();
-			PreparedStatement stmt = connection
-					.prepareStatement("SELECT * FROM Songs WHERE id = ?");
-		//	stmt.setInt(1, id);
-			
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				s.setArtist(rs.getString("artist"));
-				s.setTitle(rs.getString("title"));
-				s.setId(rs.getInt("id"));
-			}
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return s;
+	public static void main(String[] arg){
+		GetSongCommand a = new GetSongCommand();
+		Song s = a.execute(5);
+		
+		System.out.println(s.toString());
+		
 	}
 
 }
